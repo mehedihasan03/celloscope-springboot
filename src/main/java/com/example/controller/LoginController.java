@@ -34,7 +34,7 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody User payload) {
-
+		log.info("Invoke Login api[login(@RequestBody User payload)]");
 		try {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
@@ -54,7 +54,6 @@ public class LoginController {
 					res.setData(null);
 					return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 				}
-
 			}
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());

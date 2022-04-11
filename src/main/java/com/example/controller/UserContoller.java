@@ -33,6 +33,7 @@ public class UserContoller {
 
 	@PostMapping("/save")
 	public ResponseEntity<?> save(@RequestBody User payload) {
+		log.info("Invoke User save api[save(@RequestBody User payload)]");
 		try {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
@@ -57,6 +58,7 @@ public class UserContoller {
 
 	@PostMapping("/forgetPass")
 	public ResponseEntity<?> matchUser(@RequestBody User payload) {
+		log.info("Invoke api for match userId[matchUser(@RequestBody User payload)]");
 		try {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
@@ -78,16 +80,12 @@ public class UserContoller {
 		}
 	}
 
-	@PostMapping("/update")
-	public ResponseEntity<?> update(@RequestBody User payload) {
-		System.out.print(payload.getId());
-		System.out.print(payload.getPassword());
-		System.out.print(payload.getMobile());
-		System.out.print(payload.getUserId());
-		
+	@PostMapping("/reset")
+	public ResponseEntity<?> resetPassword(@RequestBody User payload) {
+		log.info("Invoke api for reset password[resetPassword(@RequestBody User payload)]");
 		try {
 			User user = service.updateUser(payload);
-			res.setMessage("password updated successfully");
+			res.setMessage("Reset your password successfully");
 			res.setStatus(MyConstant.SUCCESS);
 			res.setData(user);
 			return ResponseEntity.ok(res);
