@@ -33,15 +33,15 @@ public class UserContoller {
 
 	@PostMapping("/save")
 	public ResponseEntity<?> save(@RequestBody User payload) {
-		 try {
+		try {
 			User dbUser = service.getUserByUserId(payload.getUserId());
-			if(dbUser==null) {
+			if (dbUser == null) {
 				User user = service.saveUser(payload);
 				res.setMessage("User created successfully");
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(user);
 				return ResponseEntity.ok(res);
-			}else {
+			} else {
 				res.setMessage("userId already in use");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
@@ -53,7 +53,50 @@ public class UserContoller {
 			res.setData(null);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
 		}
-		
-		 
 	}
+
+	@PostMapping("/forgetPass")
+	public ResponseEntity<?> matchUser(@RequestBody User payload) {
+		try {
+			User dbUser = service.getUserByUserId(payload.getUserId());
+			if (dbUser == null) {
+				res.setMessage("User Id not found");
+				res.setStatus(MyConstant.FAILED);
+				res.setData(null);
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
+			} else {
+				res.setMessage("User Found");
+				res.setStatus(MyConstant.SUCCESS);
+				res.setData(dbUser);
+				return ResponseEntity.ok(res);
+			}
+		} catch (Exception e) {
+			res.setMessage(e.getMessage());
+			res.setStatus(MyConstant.FAILED);
+			res.setData(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+		}
+	}
+
+	@PostMapping("/update")
+	public ResponseEntity<?> update(@RequestBody User payload) {
+		System.out.print(payload.getId());
+		System.out.print(payload.getPassword());
+		System.out.print(payload.getMobile());
+		System.out.print(payload.getUserId());
+		
+		try {
+			User user = service.updateUser(payload);
+			res.setMessage("password updated successfully");
+			res.setStatus(MyConstant.SUCCESS);
+			res.setData(user);
+			return ResponseEntity.ok(res);
+		} catch (Exception e) {
+			res.setMessage(e.getMessage());
+			res.setStatus(MyConstant.FAILED);
+			res.setData(null);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+		}
+	}
+
 }
