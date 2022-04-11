@@ -41,17 +41,20 @@ public class UserContoller {
 				res.setMessage("User created successfully");
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(user);
+				log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
 				return ResponseEntity.ok(res);
 			} else {
 				res.setMessage("userId already in use");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
+				log.error(res.getMessage()+ " with UserId : " + payload.getUserId());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
 			}
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
 			res.setStatus(MyConstant.FAILED);
 			res.setData(null);
+			log.error("Sarver error: " + res.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
 		}
 	}
@@ -65,17 +68,20 @@ public class UserContoller {
 				res.setMessage("User Id not found");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
+				log.error(res.getMessage()+ " with UserId : " + payload.getUserId());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
 			} else {
 				res.setMessage("User Found");
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(dbUser);
+				log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
 				return ResponseEntity.ok(res);
 			}
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
 			res.setStatus(MyConstant.FAILED);
 			res.setData(null);
+			log.error("Sarver error: " + res.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
 		}
 	}
@@ -88,11 +94,13 @@ public class UserContoller {
 			res.setMessage("Reset your password successfully");
 			res.setStatus(MyConstant.SUCCESS);
 			res.setData(user);
+			log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
 			return ResponseEntity.ok(res);
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
 			res.setStatus(MyConstant.FAILED);
 			res.setData(null);
+			log.error("Sarver error: " + res.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
 		}
 	}
