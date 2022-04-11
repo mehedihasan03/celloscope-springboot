@@ -38,15 +38,23 @@ public class LoginController {
 		try {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
-				res.setMessage("Invalid UserId or Password");
+				res.setMessage("User not found");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
-				return ResponseEntity.ok(res);
+				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 			} else {
-				res.setMessage("Login Successful");
-				res.setStatus(MyConstant.SUCCESS);
-				res.setData(dbUser);
-				return ResponseEntity.ok(res);
+				if (dbUser.getPassword().equals(payload.getPassword())) {
+					res.setMessage("Login Successful");
+					res.setStatus(MyConstant.SUCCESS);
+					res.setData(dbUser);
+					return ResponseEntity.ok(res);
+				} else {
+					res.setMessage("userId or password does not match");
+					res.setStatus(MyConstant.FAILED);
+					res.setData(null);
+					return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
+				}
+
 			}
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());

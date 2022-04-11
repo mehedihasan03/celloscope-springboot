@@ -42,10 +42,10 @@ public class UserContoller {
 				res.setData(user);
 				return ResponseEntity.ok(res);
 			}else {
-				res.setMessage("User already exist");
+				res.setMessage("userId already in use");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
-				return ResponseEntity.ok(res);
+				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
 			}
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
