@@ -14,12 +14,12 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(unique=true, nullable = false)
+	@Column(unique = true, nullable = false)
 	private String userId;
 	@Column(nullable = false)
 	private String password;
 	private String mobile;
-	
+
 	public User() {
 		super();
 	}
@@ -63,7 +63,5 @@ public class User {
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
-	
-	
-	
+
 }

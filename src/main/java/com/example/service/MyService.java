@@ -18,18 +18,17 @@ public class MyService {
 		user = userRepo.save(user);
 		return user;
 	}
-	
+
 	public User updateUser(User payload) {
 		User userbyId = userRepo.findByUserId(payload.getUserId());
 		userbyId.setPassword(payload.getPassword());
 		User user = userRepo.save(userbyId);
 		return user;
 	}
-	
 
 	public User getUserByUserId(String userId) {
 
-        return userRepo.findByUserId(userId);
-    }
+		return userRepo.findByUserId(userId);
+	}
 
 }

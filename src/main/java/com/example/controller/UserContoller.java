@@ -38,16 +38,16 @@ public class UserContoller {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
 				User user = service.saveUser(payload);
-				res.setMessage("User created successfully");
+				res.setMessage("Registration Successful");
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(user);
-				log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
+				log.info(res.getMessage() + " with UserId : " + payload.getUserId());
 				return ResponseEntity.ok(res);
 			} else {
 				res.setMessage("userId already in use");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
-				log.error(res.getMessage()+ " with UserId : " + payload.getUserId());
+				log.error(res.getMessage() + " with UserId : " + payload.getUserId());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
 			}
 		} catch (Exception e) {
@@ -68,13 +68,13 @@ public class UserContoller {
 				res.setMessage("User Id not found");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
-				log.error(res.getMessage()+ " with UserId : " + payload.getUserId());
+				log.error(res.getMessage() + " with UserId : " + payload.getUserId());
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(res);
 			} else {
 				res.setMessage("User Found");
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(dbUser);
-				log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
+				log.info(res.getMessage() + " with UserId : " + payload.getUserId());
 				return ResponseEntity.ok(res);
 			}
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class UserContoller {
 			res.setMessage("Reset your password successfully");
 			res.setStatus(MyConstant.SUCCESS);
 			res.setData(user);
-			log.info(res.getMessage()+ " with UserId : " + payload.getUserId());
+			log.info(res.getMessage() + " with UserId : " + payload.getUserId());
 			return ResponseEntity.ok(res);
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());

@@ -41,20 +41,20 @@ public class LoginController {
 				res.setMessage("User not found");
 				res.setStatus(MyConstant.FAILED);
 				res.setData(null);
-				log.error(res.getMessage()+ " with UserId : " + payload.getUserId());
+				log.error(res.getMessage() + " with UserId : " + payload.getUserId());
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 			} else {
 				if (dbUser.getPassword().equals(payload.getPassword())) {
 					res.setMessage("Login Successful");
 					res.setStatus(MyConstant.SUCCESS);
 					res.setData(dbUser);
-					log.info(res.getMessage()+ " with UserId : " + dbUser.getUserId() );
+					log.info(res.getMessage() + " with UserId : " + dbUser.getUserId());
 					return ResponseEntity.ok(res);
 				} else {
 					res.setMessage("userId or password does not match");
 					res.setStatus(MyConstant.FAILED);
 					res.setData(null);
-					log.error(res.getMessage()+ " with UserId : " + dbUser.getUserId() );
+					log.error(res.getMessage() + " with UserId : " + dbUser.getUserId());
 					return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 				}
 			}
