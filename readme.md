@@ -1,6 +1,6 @@
-## cURL commands for testing api
+# CURL commands for testing api
 
-# User Registration
+## User Registration
 
 	curl --location --request POST 'http://localhost:8787/api/v1/user/save' \
 	--header 'Content-Type: application/json' \
@@ -11,7 +11,7 @@
 	    "mobile" : "01835233447"
 	}'
 	
-# User Login
+## User Login
 	
 	curl --location --request POST 'http://localhost:8787/api/v1/login' \
 	--header 'Content-Type: application/json' \
@@ -20,7 +20,7 @@
 	    "password" : "123"
 	}'
 	
-# User UserId Check
+## User UserId Check
 
 	curl --location --request POST 'http://localhost:8787/api/v1/user/forgetPass' \
 	--header 'Content-Type: application/json' \
@@ -28,7 +28,7 @@
 	    "userId" : "mehedi01"
 	}'
 
-# Reset Password
+## Reset Password
 
 	curl --location --request POST 'http://localhost:8787/api/v1/user/reset' \
 	--header 'Content-Type: application/json' \
