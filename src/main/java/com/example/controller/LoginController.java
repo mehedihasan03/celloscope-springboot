@@ -45,7 +45,7 @@ public class LoginController {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
 			} else {
 				if (dbUser.getPassword().equals(payload.getPassword())) {
-					res.setMessage("Login Successful");
+					res.setMessage("Login Successful with user ID: "+ payload.getUserId());
 					res.setStatus(MyConstant.SUCCESS);
 					res.setData(dbUser);
 					log.info(res.getMessage() + " with UserId : " + dbUser.getUserId());

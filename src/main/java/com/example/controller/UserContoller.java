@@ -38,7 +38,7 @@ public class UserContoller {
 			User dbUser = service.getUserByUserId(payload.getUserId());
 			if (dbUser == null) {
 				User user = service.saveUser(payload);
-				res.setMessage("Registration Successful");
+				res.setMessage("Registration Successful with User ID: " + user.getUserId().toString());
 				res.setStatus(MyConstant.SUCCESS);
 				res.setData(user);
 				log.info(res.getMessage() + " with UserId : " + payload.getUserId());
